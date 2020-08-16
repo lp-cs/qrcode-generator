@@ -1,4 +1,4 @@
-var qrcodelocal = $("#qrcodelocal").get(0);
+var qrcodelocal = $("#qrcodelocal")[0];
 var qrcode = new QRCode(qrcodelocal, {
     width : 300,
     height : 300
@@ -6,6 +6,17 @@ var qrcode = new QRCode(qrcodelocal, {
 
 $(document).ready(function(){
     $("#locally-generated-qrcode").hide();
+    $('#btn-download-qr-code').prop('disabled', true);
+    $("#btn-generate-via-API").prop('disabled', true);
+});
+
+$('#txtInput').keyup(function(){
+    if($("#txtInput").val()==""){
+        $('#btn-download-qr-code').prop('disabled', true);
+    } else {
+        $('#btn-download-qr-code').prop('disabled', false);
+        generateQRCodes();
+    }
 });
 
 $("#qrcode-form").submit(function(e){
@@ -13,20 +24,25 @@ $("#qrcode-form").submit(function(e){
 });
 
 $("#btn-generate-via-localJS").click(function() {
-    let data = $("#txtInput").val();
-    $("#qrcode-header").html(data);
     $("#api-generated-qrcode").hide();
-    generateQRviaLocalJS(data);
+    $("#btn-generate-via-localJS").prop('disabled', true);
+    $("#btn-generate-via-API").prop('disabled', false);
     $("#locally-generated-qrcode").show();
 });
 
 $("#btn-generate-via-API").click(function() {
-    let data = $("#txtInput").val();
-    $("#qrcode-header").html(data);
     $("#locally-generated-qrcode").hide();
-    generateQRviaAPI(data);
+    $("#btn-generate-via-API").prop('disabled', true);
+    $("#btn-generate-via-localJS").prop('disabled', false);
     $("#api-generated-qrcode").show();
 });
+
+function generateQRCodes(){
+    let data = $("#txtInput").val();
+    $("#qrcode-header").html(data);
+    generateQRviaLocalJS(data);
+    generateQRviaAPI(data);
+}
 
 $("#btn-download-qr-code").click(function() {
     downloadQRCode();
@@ -46,7 +62,7 @@ function generateQRviaAPI(data){
 }
 
 function downloadQRCode() {
-    var qrcodecard = $("#qrcodecard").get(0);
+    var qrcodecard = document.getElementById('qrcodecard');
 
     domtoimage.toPng(qrcodecard)
         .then(function (dataUrl) {
