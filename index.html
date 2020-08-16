@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+        <title>QR Code Generator</title>
+        
+        <link rel="stylesheet" href="./css/bootstrap.min.css" /> <!-- Version 4.5.2-->
+        <link rel='stylesheet' href="./css/styles.css" />
+    </head>
+    <body>
+        <div class="container text-center">
+            <div id="qrcodecard">
+                <div class="card mt-3 mb-3">
+                    <div class="card-header bg-dark">
+                        <strong class="text-white">
+                            QR Code Generator
+                        </strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="api-generated-qrcode">
+                            <img id="qrcodeapi" src='./img/icon.png' alt='QR Code generated via API'>
+                        </div>
+                        <div id="locally-generated-qrcode">
+                            <div id="qrcodelocal"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <span id="qrcode-header">
+                                QR Code Generator
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group col-12">
+                        <input id="txtInput" type="text" class="form-control" placeholder="Type Here" required />
+                    </div>
+                    <form id='qrcode-form' class="col-12">
+                        <div class="form-group">
+                            <button id="btn-generate-via-localJS" class="btn btn-block btn-outline-primary">Generate via local JS</button>
+                        </div>
+                        <div class="form-group">
+                            <button id="btn-generate-via-API" class="btn btn-outline-info btn-block">Generate via API</button>
+                        </div>
+                        <div class="form-group">
+                            <button id="btn-download-qr-code" class="btn btn-block btn-outline-success">Download QR Code</button>
+                        </div>
+                    </form>
+                </div>
+            </div>    
+        </div>
+        
+        <script src="./js/jquery.min.js" ></script> <!-- Version 3.5.1 -->
+        <script src="./js/popper.min.js" ></script> <!--Version 1.16.0-->
+        <script src="./js/bootstrap.min.js" ></script> <!--Version 4.5.2-->
+        <script src="./js/dom-to-image.js" ></script> <!--Version 2.6.0-->
+        <script src="./js/qrcode.min.js" ></script>
+        <script src="./js/scripts.js" defer ></script>
+    </body>
+</html>
